@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Sucursal;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Sucursal\PutRequest;
+use App\Http\Requests\Sucursal\StoreRequest;
 
 class SucursalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       return response()->json(Sucursal::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function all()
     {
-        //
+        return response()->json(Sucursal::get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json(Sucursal::create($request->validated()));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Sucursal $sucursal)
     {
-        //
+        return response()->json($sucursal);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Sucursal $sucursal)
+    public function update(PutRequest $request, Sucursal $sucursal)
     {
-        //
+        $sucursal->update($request->validated());
+        return response()->json($sucursal);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Sucursal $sucursal)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Sucursal $sucursal)
     {
-        //
+        $sucursal->delete();
+        return response()->json("ok");
     }
 }

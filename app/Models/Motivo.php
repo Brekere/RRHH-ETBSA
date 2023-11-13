@@ -15,6 +15,6 @@ class Motivo extends Model
     ];
 
     public function Ausencia(){
-        return $this->hasOne(Ausencia::class);
+        return $this->hasMany(Ausencia::class);
     }
 }

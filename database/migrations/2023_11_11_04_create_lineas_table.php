@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departamentos_lineas', function (Blueprint $table) {
+        Schema::create('lineas', function (Blueprint $table) {
             $table->id();
 
-            $table->foreign('departamento_id')->references('id')->on('departamentos');
-            $table->foreign('linea_id')->references('id')->on('lineas');
+            $table->string('nombre');
             
             $table->timestamps();
         });
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departamentos_lineas');
+        Schema::dropIfExists('lineas');
     }
 };

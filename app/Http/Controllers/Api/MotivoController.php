@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Motivo;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Motivo\PutRequest;
+use App\Http\Requests\Motivo\StoreRequest;
 
 class MotivoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       return response()->json(Motivo::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function all()
     {
-        //
+        return response()->json(Motivo::get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json(Motivo::create($request->validated()));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Motivo $motivo)
     {
-        //
+        return response()->json($motivo);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Motivo $motivo)
+    public function update(PutRequest $request, Motivo $motivo)
     {
-        //
+        $motivo->update($request->validated());
+        return response()->json($motivo);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Motivo $motivo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Motivo $motivo)
     {
-        //
+        $motivo->delete();
+        return response()->json("ok");
     }
 }

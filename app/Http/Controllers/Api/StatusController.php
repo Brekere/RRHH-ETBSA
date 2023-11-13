@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Status;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Status\PutRequest;
+use App\Http\Requests\Status\StoreRequest;
 
 class StatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       return response()->json(Status::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function all()
     {
-        //
+        return response()->json(Status::get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json(Status::create($request->validated()));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Status $status)
     {
-        //
+        return response()->json($status);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Status $status)
+    public function update(PutRequest $request, Status $status)
     {
-        //
+        $status->update($request->validated());
+        return response()->json($status);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Status $status)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Status $status)
     {
-        //
+        $status->delete();
+        return response()->json("ok");
     }
 }

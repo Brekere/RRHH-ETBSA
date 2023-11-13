@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Documento;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Documento\PutRequest;
+use App\Http\Requests\Documento\StoreRequest;
 
 class DocumentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       return response()->json(Documento::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function all()
     {
-        //
+        return response()->json(Documento::get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json(Documento::create($request->validated()));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Documento $documento)
     {
-        //
+        return response()->json($documento);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Documento $documento)
+    public function update(PutRequest $request, Documento $documento)
     {
-        //
+        $documento->update($request->validated());
+        return response()->json($documento);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Documento $documento)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Documento $documento)
     {
-        //
+        $documento->delete();
+        return response()->json("ok");
     }
 }

@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Departamento;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Departamento\PutRequest;
+use App\Http\Requests\Departamento\StoreRequest;
 
 class DepartamentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       return response()->json(Departamento::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function all()
     {
-        //
+        return response()->json(Departamento::get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json(Departamento::create($request->validated()));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Departamento $departamento)
     {
-        //
+        return response()->json($departamento);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Departamento $departamento)
+    public function update(PutRequest $request, Departamento $departamento)
     {
-        //
+        $departamento->update($request->validated());
+        return response()->json($departamento);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Departamento $departamento)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Departamento $departamento)
     {
-        //
+        $departamento->delete();
+        return response()->json("ok");
     }
 }

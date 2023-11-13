@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Feriado;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Feriado\PutRequest;
+use App\Http\Requests\Feriado\StoreRequest;
 
 class FeriadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       return response()->json(Feriado::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function all()
     {
-        //
+        return response()->json(Feriado::get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json(Feriado::create($request->validated()));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Feriado $feriado)
     {
-        //
+        return response()->json($feriado);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Feriado $feriado)
+    public function update(PutRequest $request, Feriado $feriado)
     {
-        //
+        $feriado->update($request->validated());
+        return response()->json($feriado);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Feriado $feriado)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Feriado $feriado)
     {
-        //
+        $feriado->delete();
+        return response()->json("ok");
     }
 }

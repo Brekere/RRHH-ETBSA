@@ -25,12 +25,19 @@ return new class extends Migration
             $table->date('fecha_de_ingreso');
             $table->string('cuenta_de_nomina');
 
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('sucursal_id');
+            $table->unsignedBigInteger('linea_id');
+            $table->unsignedBigInteger('departamento_id');
+            $table->unsignedBigInteger('cargo_id');
+            $table->unsignedBigInteger('expediente_id');
+            $table->unsignedBigInteger('periodo_id');
+
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('sucursal_id')->references('id')->on('sucursales');
             $table->foreign('linea_id')->references('id')->on('lineas');
             $table->foreign('departamento_id')->references('id')->on('departamentos');
             $table->foreign('cargo_id')->references('id')->on('cargos');
-            $table->foreign('jefe_directo')->references('id')->on('empleados');
             $table->foreign('expediente_id')->references('id')->on('expedientes');
             $table->foreign('periodo_id')->references('id')->on('periodos');
             

@@ -12,12 +12,16 @@ class Linea extends Model
 
     protected $fillable = [
         'nombre',
-
-        'gerente'
     ];
 
-    public function Gerente(){
-        return $this->belongsTo(Empleado::class, 'gerente');
+    public function departamentos()
+    {
+        return $this->belongsToMany(Departamento::class, 'departamentos_lineas', 'linea_id', 'departamento_id');
+    }
+
+    public function sucursales()
+    {
+        return $this->belongsToMany(Sucursal::class, 'sucursales_lineas', 'linea_id', 'sucursal_id');
     }
 
     //---------------------------------------------------------------------

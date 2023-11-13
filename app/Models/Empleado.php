@@ -33,7 +33,6 @@ class Empleado extends Model
         'linea_id',
         'departamento_id',
         'cargo_id',
-        'jefe_directo',
         'expediente_id',
         'periodo_id'
     ];
@@ -58,10 +57,6 @@ class Empleado extends Model
         return $this->belongsTo(Cargo::class);
     }
 
-    public function jefe_directo(){
-        return $this->belongsTo(Empleado::class, 'jefe_directo');
-    }
-
     public function Expediente(){
         return $this->belongsTo(Expediente::class);
     }
@@ -72,22 +67,6 @@ class Empleado extends Model
 
 // --------------------------------------------------------------------------------
 
-    public function empleados()
-    {
-        return $this->hasMany(Usuario::class, 'jefe_directo');
-    }
-
-    public function Gerente_sucursal(){
-        return $this->hasOne(Empleado::class, 'gerente');
-    }
-
-    public function Gerente_linea(){
-        return $this->hasOne(Empleado::class, 'gerente');
-    }
-
-    public function Gerente_departamento(){
-        return $this->hasOne(Empleado::class, 'gerente');
-    }
 
     public function Ausencia(){
         return $this->hasMany(Ausencia::class);

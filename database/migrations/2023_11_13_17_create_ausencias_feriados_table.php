@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departamentos', function (Blueprint $table) {
+        Schema::create('ausencias_feriados', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nombre');
+            $table->unsignedBigInteger('ausencia_id');
+            $table->unsignedBigInteger('feriado_id');
 
-            $table->foreign('gerente')->references('id')->on('empleados');
-            
+            $table->foreign('ausencia_id')->references('id')->on('ausencias');
+            $table->foreign('feriado_id')->references('id')->on('feriados');
+
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departamentos');
+        Schema::dropIfExists('ausencias_feriados');
     }
 };

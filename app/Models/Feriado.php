@@ -16,6 +16,6 @@ class Feriado extends Model
     ];
 
     public function Ausencia(){
-        return $this->hasMany(Ausencia::class);
+        return $this->belongsToMany(Ausencia::class, 'ausencias_feriados', 'feriado_id', 'ausencia_id');
     }
 }

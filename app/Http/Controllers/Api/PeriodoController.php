@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Periodo;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Periodo\PutRequest;
+use App\Http\Requests\Periodo\StoreRequest;
 
 class PeriodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       return response()->json(Periodo::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function all()
     {
-        //
+        return response()->json(Periodo::get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json(Periodo::create($request->validated()));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Periodo $periodo)
     {
-        //
+        return response()->json($periodo);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Periodo $periodo)
+    public function update(PutRequest $request, Periodo $periodo)
     {
-        //
+        $periodo->update($request->validated());
+        return response()->json($periodo);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Periodo $periodo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Periodo $periodo)
     {
-        //
+        $periodo->delete();
+        return response()->json("ok");
     }
 }

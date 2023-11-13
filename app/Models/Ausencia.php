@@ -38,6 +38,6 @@ class Ausencia extends Model
     }
 
     public function Feriado(){
-        return $this->belongsTo(Feriado::class);
+        return $this->belongsToMany(Feriado::class, 'ausencias_feriados', 'ausencia_id', 'feriado_id');
     }
 }

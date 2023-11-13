@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Cargo;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Cargo\PutRequest;
+use App\Http\Requests\Cargo\StoreRequest;
 
 class CargoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+       return response()->json(Cargo::paginate(5));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function all()
     {
-        //
+        return response()->json(Cargo::get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        return response()->json(Cargo::create($request->validated()));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Cargo $cargo)
     {
-        //
+        return response()->json($cargo);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cargo $cargo)
+    public function update(PutRequest $request, Cargo $cargo)
     {
-        //
+        $cargo->update($request->validated());
+        return response()->json($cargo);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cargo $cargo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Cargo $cargo)
     {
-        //
+        $cargo->delete();
+        return response()->json("ok");
     }
 }

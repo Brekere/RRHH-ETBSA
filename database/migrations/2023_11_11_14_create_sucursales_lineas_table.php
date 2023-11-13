@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lineas', function (Blueprint $table) {
+        Schema::create('sucursales_lineas', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nombre');
+            $table->unsignedBigInteger('sucursal_id');
+            $table->unsignedBigInteger('linea_id');
 
-            $table->foreign('gerente')->references('id')->on('empleados');
+            $table->foreign('sucursal_id')->references('id')->on('sucursales');
+            $table->foreign('linea_id')->references('id')->on('lineas');
             
             $table->timestamps();
         });
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lineas');
+        Schema::dropIfExists('sucursales_lineas');
     }
 };

@@ -19,7 +19,12 @@ return new class extends Migration
             $table->date('fecha_de_termino');
             $table->integer('dias_disfrute');
 
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->unsignedBigInteger('empleado_id');
+            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('motivo_id');
+            $table->unsignedBigInteger('feriado_id');
+
+            $table->foreign('empleado_id')->references('numero_de_empleado')->on('empleados');
             $table->foreign('status_id')->references('id')->on('status');
             $table->foreign('motivo_id')->references('id')->on('motivos');
             $table->foreign('feriado_id')->references('id')->on('feriados');

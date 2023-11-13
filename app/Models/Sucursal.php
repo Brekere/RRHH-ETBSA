@@ -13,12 +13,16 @@ class Sucursal extends Model
     protected $fillable = [
         'nombre',
         'domicilio',
-
-        'gerente'
     ];
 
-    public function Gerente(){
-        return $this->belongsTo(Empleado::class, 'gerente');
+    public function lineas()
+    {
+        return $this->belongsToMany(Linea::class, 'sucursales_lineas', 'sucursal_id', 'linea_id');
+    }
+
+    public function departamentos()
+    {
+        return $this->belongsToMany(Departamento::class, 'sucursales_departamentos', 'sucursal_id', 'departamento_id');
     }
 
     //---------------------------------------------------------------------------------

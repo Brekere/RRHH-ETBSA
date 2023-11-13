@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Ausencia;
 
+use Illuminate\Http\Response;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Validation\Validator;
 
 class PutRequest extends FormRequest
 {
@@ -25,4 +28,14 @@ class PutRequest extends FormRequest
             //
         ];
     }
+
+    function failedValidation(Validator $validator)
+    {
+        if($this->expectsJson())
+            {
+                $response = new Response($validator->errors(),422);
+                throw new ValidationException($validator, $response);
+            }
+    }
 }
+
