@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('empleados', function (Blueprint $table) {
-            $table->id('numero_de_empleado');
+            $table->id();
 
             $table->string('nombre');
             $table->string('apellido_paterno');
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->unsignedBigInteger('periodo_id');
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('sucursal_id')->references('id')->on('sucursales');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals');
             $table->foreign('linea_id')->references('id')->on('lineas');
             $table->foreign('departamento_id')->references('id')->on('departamentos');
             $table->foreign('cargo_id')->references('id')->on('cargos');

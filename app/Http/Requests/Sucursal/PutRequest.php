@@ -14,7 +14,7 @@ class PutRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,9 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|min:3|max:255'. $this->route("sucursal")->id,
+            'domicilio' => 'required|string|max:255,'. $this->route("sucursal")->id,
+            'encargado' => 'nullable|integer',
         ];
     }
 

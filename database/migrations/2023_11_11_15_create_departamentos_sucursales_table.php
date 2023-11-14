@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sucursal_id');
 
             $table->foreign('departamento_id')->references('id')->on('departamentos');
-            $table->foreign('sucursal_id')->references('id')->on('sucursales');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals');
             
             $table->timestamps();
         });

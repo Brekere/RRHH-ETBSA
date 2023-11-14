@@ -15,12 +15,6 @@ use App\Http\Controllers\Api\PeriodoController;
 use App\Http\Controllers\Api\RequisitoController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\SucursalController;
-use App\Models\Ausencia;
-use App\Models\Cargo;
-use App\Models\Departamento;
-use App\Models\Documento;
-use App\Models\Empleado;
-use App\Models\Expediente;
 
 /*
 |--------------------------------------------------------------------------

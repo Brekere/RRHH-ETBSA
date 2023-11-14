@@ -25,7 +25,7 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nombre" => "required|min:5|max:255|unique:cargos,nombre"
+            "nombre" => "required|min:5|max:255" . $this->route("cargo")->id,
         ];
     }
 

@@ -24,8 +24,8 @@ return new class extends Migration
             $table->unsignedBigInteger('motivo_id');
             $table->unsignedBigInteger('feriado_id');
 
-            $table->foreign('empleado_id')->references('numero_de_empleado')->on('empleados');
-            $table->foreign('status_id')->references('id')->on('status');
+            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->foreign('motivo_id')->references('id')->on('motivos');
             $table->foreign('feriado_id')->references('id')->on('feriados');
             

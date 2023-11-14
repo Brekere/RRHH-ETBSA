@@ -14,7 +14,7 @@ class PutRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,8 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'fecha' => 'required|date' . $this->route("feriado")->id,
+            'descripcion' => 'required' . $this->route("feriado")->id,
         ];
     }
 

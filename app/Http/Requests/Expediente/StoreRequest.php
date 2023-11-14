@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'path' => 'required|string|unique:expedientes,path,',
+            'documento_id' => 'required|integer',
         ];
     }
 

@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|unique:sucursals,nombre|min:3|max:255',
+            'domicilio' => 'required|string|unique:sucursals,domicilio,',
+            'encargado' => 'nullable|integer',
         ];
     }
 

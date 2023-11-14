@@ -27,7 +27,7 @@ class Sucursal extends Model
     }
 
     public function Encargado(){
-        return $this->belongsTo(Empleado::class,'numero_de_empleado');
+        return $this->belongsTo(Empleado::class);
     }
 
     //---------------------------------------------------------------------------------

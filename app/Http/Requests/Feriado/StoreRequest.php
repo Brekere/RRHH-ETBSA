@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'fecha' => 'required|date|unique:feriados,fecha',
+            'descripcion' => 'required|unique:feriados,descripcion',
         ];
     }
 

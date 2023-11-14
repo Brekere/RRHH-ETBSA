@@ -69,7 +69,7 @@ class Empleado extends Model
 
     public function jefeDirecto()
     {
-        return $this->belongsTo(Empleado::class, 'jefe_directo', 'numero_de_empleado');
+        return $this->belongsTo(Empleado::class, 'jefe_directo');
     }
 
 // --------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ class Empleado extends Model
 
     public function Empleado()
     {
-        return $this->hasOne(Empleado::class, 'jefe_directo', 'numero_de_empleado');
+        return $this->hasOne(Empleado::class, 'jefe_directo');
     }
 
     public function Encargado_Sucursal(){

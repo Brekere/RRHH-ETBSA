@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('sucursales', function (Blueprint $table) {
-            $table->unsignedBigInteger('encargado');
-            $table->foreign('encargado')->references('numero_de_empleado')->on('empleados');
+        Schema::table('sucursals', function (Blueprint $table) {
+            $table->unsignedBigInteger('encargado')->nullable();
+            $table->foreign('encargado')->references('id')->on('empleados');
         });
     }
 

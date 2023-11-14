@@ -14,7 +14,7 @@ class PutRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,9 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'años' => 'required|integer|max:35' . $this->route("periodo")->id,
+            'dias_correspondientes' => 'required|integer',
+            'regimen' => 'required|string|max:4',
         ];
     }
 

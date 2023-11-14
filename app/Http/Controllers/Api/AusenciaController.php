@@ -25,21 +25,20 @@ class AusenciaController extends Controller
         return response()->json(Ausencia::create($request->validated()));
     }
 
-    public function show(Ausencia $ausencia)
+    public function show(Ausencia $ausencium)
     {
-        return response()->json($ausencia);
+        return response()->json($ausencium);
     }
 
-    public function update(PutRequest $request, Ausencia $ausencia)
+    public function update(PutRequest $request, Ausencia $ausencium)
     {
-        $ausencia->update($request->validated());
-        return response()->json($ausencia);
+        $ausencium->update($request->validated());
+        return response()->json($ausencium);
     }
 
-    public function destroy(Ausencia $ausencia)
+    public function destroy(Ausencia $ausencium)
     {
-        $ausencia->delete();
+        $ausencium->delete();
         return response()->json("ok");
     }
-    
 }

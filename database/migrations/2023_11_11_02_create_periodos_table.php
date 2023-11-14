@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('periodos', function (Blueprint $table) {
             $table->id();
 
-            $table->string('años');
+            $table->integer('años');
             $table->integer('dias_correspondientes');
             $table->string('regimen');
             

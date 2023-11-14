@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'años' => 'required|integer|unique:periodos,años|max:35',
+            'dias_correspondientes' => 'required|integer',
+            'regimen' => 'required|string|max:4',
         ];
     }
 

@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|unique:documentos,nombre|min:3|max:255',
+            'path' => 'required|unique:documentos,path|string',
+            'requisito_id' => 'required|integer',
         ];
     }
 
