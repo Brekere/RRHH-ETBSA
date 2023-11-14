@@ -12,6 +12,7 @@ class Linea extends Model
 
     protected $fillable = [
         'nombre',
+        'encargado'
     ];
 
     public function departamentos()
@@ -22,6 +23,10 @@ class Linea extends Model
     public function sucursales()
     {
         return $this->belongsToMany(Sucursal::class, 'sucursales_lineas', 'linea_id', 'sucursal_id');
+    }
+
+    public function Encargado(){
+        return $this->belongsTo(Empleado::class,'numero_de_empleado');
     }
 
     //---------------------------------------------------------------------

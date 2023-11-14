@@ -13,6 +13,7 @@ class Sucursal extends Model
     protected $fillable = [
         'nombre',
         'domicilio',
+        'encargado'
     ];
 
     public function lineas()
@@ -23,6 +24,10 @@ class Sucursal extends Model
     public function departamentos()
     {
         return $this->belongsToMany(Departamento::class, 'sucursales_departamentos', 'sucursal_id', 'departamento_id');
+    }
+
+    public function Encargado(){
+        return $this->belongsTo(Empleado::class,'numero_de_empleado');
     }
 
     //---------------------------------------------------------------------------------

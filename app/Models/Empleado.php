@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Cargo;
 use App\Models\Linea;
 use App\Models\Periodo;
+use App\Models\Ausencia;
 use App\Models\Sucursal;
 use App\Models\Expediente;
 use App\Models\Departamento;
@@ -34,7 +35,8 @@ class Empleado extends Model
         'departamento_id',
         'cargo_id',
         'expediente_id',
-        'periodo_id'
+        'periodo_id',
+        'jefe_directo'
     ];
 
     public function User(){
@@ -65,10 +67,33 @@ class Empleado extends Model
         return $this->belongsTo(Periodo::class);
     }
 
+    public function jefeDirecto()
+    {
+        return $this->belongsTo(Empleado::class, 'jefe_directo', 'numero_de_empleado');
+    }
+
 // --------------------------------------------------------------------------------
 
 
     public function Ausencia(){
         return $this->hasMany(Ausencia::class);
     }
+
+    public function Empleado()
+    {
+        return $this->hasOne(Empleado::class, 'jefe_directo', 'numero_de_empleado');
+    }
+
+    public function Encargado_Sucursal(){
+        return $this->hasOne(Sucursal::class);
+    }
+
+    public function Encargado_Linea(){
+        return $this->hasOne(Linea::class);
+    }
+
+    public function Encargado_Departamento(){
+        return $this->hasOne(Departamento::class);
+    }
+    
 }
