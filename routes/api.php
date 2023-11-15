@@ -31,43 +31,36 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('ausencia/all',[AusenciaController::class,'all']);
-Route::get('cargo/all',[CargoController::class,'all']);
-Route::get('departamento/all',[DepartamentoController::class,'all']);
-Route::get('documento/all',[DocumentoController::class,'all']);
-Route::get('empleado/all',[EmpleadoController::class,'all']);
-Route::get('expediente/all',[ExpedienteController::class,'all']);
-Route::get('feriado/all',[FeriadoController::class,'all']);
-Route::get('linea/all',[LineaController::class,'all']);
-Route::get('motivo/all',[MotivoController::class,'all']);
-Route::get('periodo/all',[PeriodoController::class,'all']);
-Route::get('requisito/all',[RequisitoController::class,'all']);
-Route::get('status/all',[StatusController::class,'all']);
-Route::get('sucursal/all',[SucursalController::class,'all']);
+Route::get('ausencia/all', [AusenciaController::class, 'all']);
+Route::get('cargo/all', [CargoController::class, 'all']);
+Route::get('departamento/all', [DepartamentoController::class, 'all']);
+Route::get('documento/all', [DocumentoController::class, 'all']);
+Route::get('empleado/all', [EmpleadoController::class, 'all']);
+Route::get('expediente/all', [ExpedienteController::class, 'all']);
+Route::get('feriado/all', [FeriadoController::class, 'all']);
+Route::get('linea/all', [LineaController::class, 'all']);
+Route::get('motivo/all', [MotivoController::class, 'all']);
+Route::get('periodo/all', [PeriodoController::class, 'all']);
+Route::get('requisito/all', [RequisitoController::class, 'all']);
+Route::get('status/all', [StatusController::class, 'all']);
+Route::get('sucursal/all', [SucursalController::class, 'all']);
 
-Route::resource('ausencia',AusenciaController::class)->except("create","edit");
-Route::resource('cargo',CargoController::class)->except("create","edit");
-Route::resource('departamento',DepartamentoController::class)->except("create","edit");
-Route::resource('documento',DocumentoController::class)->except("create","edit");
-Route::resource('empleado',EmpleadoController::class)->except("create","edit");
-Route::resource('expediente',ExpedienteController::class)->except("create","edit");
-Route::resource('feriado',FeriadoController::class)->except("create","edit");
-Route::resource('linea',LineaController::class)->except("create","edit");
-Route::resource('motivo',MotivoController::class)->except("create","edit");
-Route::resource('periodo',PeriodoController::class)->except("create","edit");
-Route::resource('requisito',RequisitoController::class)->except("create","edit");
-Route::resource('status',StatusController::class)->except("create","edit");
-Route::resource('sucursal',SucursalController::class)->except("create","edit");
+Route::resource('ausencia', AusenciaController::class)->except("create", "edit");
+Route::resource('cargo', CargoController::class)->except("create", "edit");
+Route::resource('departamento', DepartamentoController::class)->except("create", "edit");
+Route::resource('documento', DocumentoController::class)->except("create", "edit");
+Route::resource('empleado', EmpleadoController::class)->except("create", "edit");
+Route::resource('expediente', ExpedienteController::class)->except("create", "edit");
+Route::resource('feriado', FeriadoController::class)->except("create", "edit");
+Route::resource('linea', LineaController::class)->except("create", "edit");
+Route::resource('motivo', MotivoController::class)->except("create", "edit");
+Route::resource('periodo', PeriodoController::class)->except("create", "edit");
+Route::resource('requisito', RequisitoController::class)->except("create", "edit");
+Route::resource('status', StatusController::class)->except("create", "edit");
+Route::resource('sucursal', SucursalController::class)->except("create", "edit");
 
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('empleado/sucursal/{sucursal_id}', [EmpleadoController::class, 'obtenerEmpleadosPorSucursal']);
+Route::get('empleado/linea/{linea_id}', [EmpleadoController::class, 'obtenerEmpleadosPorLinea']);
+Route::get('empleado/departamento/{departamento_id}', [EmpleadoController::class, 'obtenerEmpleadosPorDepartamento']);
+Route::get('empleado/cargo/{cargo_id}', [EmpleadoController::class, 'obtenerEmpleadosPorCargo']);
+Route::get('empleado/jefe_directo/{jefe_directo}', [EmpleadoController::class, 'obtenerEmpleadosPorJefeDirecto']);
