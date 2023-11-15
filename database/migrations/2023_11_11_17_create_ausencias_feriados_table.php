@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('ausencia_id');
             $table->unsignedBigInteger('feriado_id');
 
-            $table->foreign('ausencia_id')->references('id')->on('ausencias');
-            $table->foreign('feriado_id')->references('id')->on('feriados');
+            $table->foreign('ausencia_id')->references('id')->on('ausencias')->onDelete('cascade');
+            $table->foreign('feriado_id')->references('id')->on('feriados')->onDelete('cascade');
 
             $table->timestamps();
         });

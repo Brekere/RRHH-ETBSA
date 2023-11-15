@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('sucursals', function (Blueprint $table) {
             $table->unsignedBigInteger('encargado')->nullable();
-            $table->foreign('encargado')->references('id')->on('empleados');
+            $table->foreign('encargado')->references('id')->on('empleados')->onDelete('cascade');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('sucursales', function (Blueprint $table) {
+        Schema::table('sucursals', function (Blueprint $table) {
             //
         });
     }

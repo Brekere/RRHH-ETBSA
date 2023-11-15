@@ -22,12 +22,10 @@ return new class extends Migration
             $table->unsignedBigInteger('empleado_id');
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('motivo_id');
-            $table->unsignedBigInteger('feriado_id');
 
-            $table->foreign('empleado_id')->references('id')->on('empleados');
-            $table->foreign('status_id')->references('id')->on('statuses');
-            $table->foreign('motivo_id')->references('id')->on('motivos');
-            $table->foreign('feriado_id')->references('id')->on('feriados');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
+            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
+            $table->foreign('motivo_id')->references('id')->on('motivos')->onDelete('cascade');
             
             $table->timestamps();
         });

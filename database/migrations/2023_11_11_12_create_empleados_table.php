@@ -33,13 +33,13 @@ return new class extends Migration
             $table->unsignedBigInteger('expediente_id');
             $table->unsignedBigInteger('periodo_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('sucursal_id')->references('id')->on('sucursals');
-            $table->foreign('linea_id')->references('id')->on('lineas');
-            $table->foreign('departamento_id')->references('id')->on('departamentos');
-            $table->foreign('cargo_id')->references('id')->on('cargos');
-            $table->foreign('expediente_id')->references('id')->on('expedientes');
-            $table->foreign('periodo_id')->references('id')->on('periodos');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals')->onDelete('cascade');
+            $table->foreign('linea_id')->references('id')->on('lineas')->onDelete('cascade');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
+            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
+            $table->foreign('expediente_id')->references('id')->on('expedientes')->onDelete('cascade');
+            $table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('cascade');
             
             $table->timestamps();
         });
