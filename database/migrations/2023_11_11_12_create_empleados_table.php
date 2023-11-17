@@ -25,21 +25,21 @@ return new class extends Migration
             $table->date('fecha_de_ingreso');
             $table->string('cuenta_de_nomina');
 
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('sucursal_id');
-            $table->unsignedBigInteger('linea_id');
-            $table->unsignedBigInteger('departamento_id');
-            $table->unsignedBigInteger('cargo_id');
-            $table->unsignedBigInteger('expediente_id');
-            $table->unsignedBigInteger('periodo_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('sucursal_id')->nullable();
+            $table->unsignedBigInteger('linea_id')->nullable();
+            $table->unsignedBigInteger('departamento_id')->nullable();
+            $table->unsignedBigInteger('cargo_id')->nullable();
+            $table->unsignedBigInteger('expediente_id')->nullable();
+            $table->unsignedBigInteger('periodo_id')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('sucursal_id')->references('id')->on('sucursals')->onDelete('cascade');
-            $table->foreign('linea_id')->references('id')->on('lineas')->onDelete('cascade');
-            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
-            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
-            $table->foreign('expediente_id')->references('id')->on('expedientes')->onDelete('cascade');
-            $table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals')->onDelete('set null');
+            $table->foreign('linea_id')->references('id')->on('lineas')->onDelete('set null');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('set null');
+            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('set null');
+            $table->foreign('expediente_id')->references('id')->on('expedientes')->onDelete('set null');
+            $table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('set null');
             
             $table->timestamps();
         });

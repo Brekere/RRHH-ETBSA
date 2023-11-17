@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('path');
 
-            $table->unsignedBigInteger('requisito_id');
+            $table->unsignedBigInteger('requisito_id')->nullable();
 
-            $table->foreign('requisito_id')->references('id')->on('requisitos')->onDelete('cascade');
+            $table->foreign('requisito_id')->references('id')->on('requisitos')->onDelete('set null');
             
             $table->timestamps();
         });

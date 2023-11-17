@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('sucursales_lineas', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('sucursal_id');
-            $table->unsignedBigInteger('linea_id');
+            $table->unsignedBigInteger('sucursal_id')->nullable();
+            $table->unsignedBigInteger('linea_id')->nullable();
 
-            $table->foreign('sucursal_id')->references('id')->on('sucursals')->onDelete('cascade');
-            $table->foreign('linea_id')->references('id')->on('lineas')->onDelete('cascade');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals')->onDelete('set null');
+            $table->foreign('linea_id')->references('id')->on('lineas')->onDelete('set null');
             
             $table->timestamps();
         });

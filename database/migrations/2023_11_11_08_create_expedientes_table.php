@@ -16,9 +16,9 @@ return new class extends Migration
 
             $table->string('path');
 
-            $table->unsignedBigInteger('documento_id');
+            $table->unsignedBigInteger('documento_id')->nullable();
 
-            $table->foreign('documento_id')->references('id')->on('documentos')->onDelete('cascade');
+            $table->foreign('documento_id')->references('id')->on('documentos')->onDelete('set null');
             
             $table->timestamps();
         });

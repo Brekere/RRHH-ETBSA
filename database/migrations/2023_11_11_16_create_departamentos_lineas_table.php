@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('departamentos_lineas', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('departamento_id');
-            $table->unsignedBigInteger('linea_id');
+            $table->unsignedBigInteger('departamento_id')->nullable();
+            $table->unsignedBigInteger('linea_id')->nullable();
 
-            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
-            $table->foreign('linea_id')->references('id')->on('lineas')->onDelete('cascade');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('set null');
+            $table->foreign('linea_id')->references('id')->on('lineas')->onDelete('set null');
             
             $table->timestamps();
         });

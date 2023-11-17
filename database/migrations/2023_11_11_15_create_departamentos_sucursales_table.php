@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('departamentos_sucursales', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('departamento_id');
-            $table->unsignedBigInteger('sucursal_id');
+            $table->unsignedBigInteger('departamento_id')->nullable();
+            $table->unsignedBigInteger('sucursal_id')->nullable();
 
-            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
-            $table->foreign('sucursal_id')->references('id')->on('sucursals')->onDelete('cascade');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('set null');
+            $table->foreign('sucursal_id')->references('id')->on('sucursals')->onDelete('set null');
             
             $table->timestamps();
         });

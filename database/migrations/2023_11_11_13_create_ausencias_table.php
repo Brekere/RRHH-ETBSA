@@ -19,13 +19,13 @@ return new class extends Migration
             $table->date('fecha_de_termino');
             $table->integer('dias_disfrute');
 
-            $table->unsignedBigInteger('empleado_id');
-            $table->unsignedBigInteger('status_id');
-            $table->unsignedBigInteger('motivo_id');
+            $table->unsignedBigInteger('empleado_id')->nullable();
+            $table->unsignedBigInteger('status_id')->nullable();
+            $table->unsignedBigInteger('motivo_id')->nullable();
 
-            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
-            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
-            $table->foreign('motivo_id')->references('id')->on('motivos')->onDelete('cascade');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('set null');
+            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('set null');
+            $table->foreign('motivo_id')->references('id')->on('motivos')->onDelete('set null');
             
             $table->timestamps();
         });

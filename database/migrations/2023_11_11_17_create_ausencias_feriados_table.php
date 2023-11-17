@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('ausencias_feriados', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('ausencia_id');
-            $table->unsignedBigInteger('feriado_id');
+            $table->unsignedBigInteger('ausencia_id')->nullable();
+            $table->unsignedBigInteger('feriado_id')->nullable();
 
-            $table->foreign('ausencia_id')->references('id')->on('ausencias')->onDelete('cascade');
-            $table->foreign('feriado_id')->references('id')->on('feriados')->onDelete('cascade');
+            $table->foreign('ausencia_id')->references('id')->on('ausencias')->onDelete('set null');
+            $table->foreign('feriado_id')->references('id')->on('feriados')->onDelete('set null');
 
             $table->timestamps();
         });
