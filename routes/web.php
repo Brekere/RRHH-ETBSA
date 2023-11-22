@@ -28,4 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/vue/{n1?}/{n2?}/{n3?}', function () {
+    return view('vue');
+});
+
 require __DIR__.'/auth.php';

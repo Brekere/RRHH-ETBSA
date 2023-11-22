@@ -25,15 +25,15 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "fecha_de_llenado" => "required|date",
-            "fecha_de_inicio" => "required|date",
-            "fecha_de_termino" => "required|date",
-            "dias_disfrute"=>"required|integer",
+            "fecha_de_inicio" => ['required','date'],
+            "fecha_de_termino" => ['required','date'],
+            "fecha_de_regreso" => ['required','date'],
+            "dias_disfrute"=>['required','integer'],
 
-            "empleado_id"=>"required|integer",
-            "status_id"=>"required|integer",
-            "motivo_id"=>"required|integer",
-            "feriado_id"=>"required|integer",
+            "solicitante"=>['required','integer'],
+            "quien_cubre"=>['required','integer'],
+            "status_id"=>['required','integer'],
+            "motivo_id"=>['required','integer'],
         ];
     }
 

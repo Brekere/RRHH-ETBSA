@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use App\Models\Feriado;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class FeriadosSeeder extends Seeder
         for ($i = 1; $i < 10; $i++) {
             Feriado::create(
                 [
-                    'fecha' => now(),
+                    'fecha' => Carbon::now()->subDays(rand(1, 30)),
                     'descripcion' => "Feriado $i",
                 ]
             );

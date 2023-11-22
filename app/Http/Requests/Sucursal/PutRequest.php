@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Sucursal;
 
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PutRequest extends FormRequest
 {
@@ -25,9 +26,9 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|min:3|max:255'. $this->route("sucursal")->id,
-            'domicilio' => 'required|string|max:255,'. $this->route("sucursal")->id,
-            'encargado' => 'nullable|integer',
+            "nombre" => ['required','min:5','max:255',Rule::unique('sucursals')->ignore($this->route('sucursal')->id)],
+            'domicilio' => ['required','string','max:255',Rule::unique('sucursals')->ignore($this->route("sucursal")->id)],
+            'encargado' => ['nullable','integer'],
         ];
     }
 

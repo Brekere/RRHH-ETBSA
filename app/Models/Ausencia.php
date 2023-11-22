@@ -14,19 +14,24 @@ class Ausencia extends Model
     use HasFactory;
 
     protected $fillable = [
-        'fecha_de_llenado',
         'fecha_de_inicio',
         'fecha_de_termino',
+        'fecha_de_regreso',
         'dias_disfrute',
 
-        'empleado_id',
+        'solicitante',
+        'quien_cubre',
         'status_id',
         'motivo_id',
         'feriado_id'
     ];
 
-    public function Empleado(){
-        return $this->belongsTo(Empleado::class);
+    public function Solicitante(){
+        return $this->belongsTo(Empleado::class,'empleados');
+    }
+
+    public function QuienCubre(){
+        return $this->belongsTo(Empleado::class,'empleados');
     }
 
     public function Status(){
@@ -38,6 +43,6 @@ class Ausencia extends Model
     }
 
     public function Feriado(){
-        return $this->belongsToMany(Feriado::class, 'ausencias_feriados', 'ausencia_id', 'feriado_id');
+        return $this->belongsTo(Feriado::class);
     }
 }

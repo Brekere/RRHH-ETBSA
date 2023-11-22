@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Sucursal;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sucursal\PutRequest;
 use App\Http\Requests\Sucursal\StoreRequest;

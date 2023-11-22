@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Feriado;
 
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PutRequest extends FormRequest
 {
@@ -25,8 +26,8 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fecha' => 'required|date' . $this->route("feriado")->id,
-            'descripcion' => 'required' . $this->route("feriado")->id,
+                'fecha' => ['required','date',Rule::unique('feriados')->ignore($this->route("feriado")->id)],
+                'descripcion' => ['required',Rule::unique('feriados')->ignore($this->route("feriado")->id)],
         ];
     }
 

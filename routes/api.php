@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\PeriodoController;
 use App\Http\Controllers\Api\RequisitoController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\SucursalController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::get('periodo/all', [PeriodoController::class, 'all']);
 Route::get('requisito/all', [RequisitoController::class, 'all']);
 Route::get('status/all', [StatusController::class, 'all']);
 Route::get('sucursal/all', [SucursalController::class, 'all']);
+Route::get('user/all', [UserController::class, 'all']);
 
 Route::resource('ausencia', AusenciaController::class)->except("create", "edit");
 Route::resource('cargo', CargoController::class)->except("create", "edit");
@@ -58,6 +60,7 @@ Route::resource('periodo', PeriodoController::class)->except("create", "edit");
 Route::resource('requisito', RequisitoController::class)->except("create", "edit");
 Route::resource('status', StatusController::class)->except("create", "edit");
 Route::resource('sucursal', SucursalController::class)->except("create", "edit");
+Route::resource('user', UserController::class)->except("create", "edit");
 
 Route::get('empleado/sucursal/{sucursal_id}', [EmpleadoController::class, 'obtenerEmpleadosPorSucursal']);
 Route::get('empleado/linea/{linea_id}', [EmpleadoController::class, 'obtenerEmpleadosPorLinea']);

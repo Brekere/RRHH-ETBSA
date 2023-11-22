@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Linea;
 
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PutRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|min:3|max:255' . $this->route("linea")->id,
+            "nombre" => ['required','min:5','max:255',Rule::unique('lineas')->ignore($this->route('linea')->id)],
             'encargado' => 'required|integer',
         ];
     }

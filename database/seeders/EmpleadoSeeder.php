@@ -2,19 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Cargo;
-use App\Models\Departamento;
+use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Empleado;
-use App\Models\Expediente;
+use App\Models\Cargo;
 use App\Models\Linea;
 use App\Models\Periodo;
+use Nette\Utils\Floats;
+use App\Models\Empleado;
 use App\Models\Sucursal;
+use App\Models\Expediente;
 use Illuminate\Support\Str;
+use App\Models\Departamento;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Nette\Utils\Floats;
 
 class EmpleadoSeeder extends Seeder
 {
@@ -28,6 +29,8 @@ class EmpleadoSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         for ($i = 1; $i < 10; $i++) {
+            $usuario = User::find($i);
+            $expediente = Expediente::find($i);
             Empleado::create(
                 [
                     'nombre' => "Empleado $i",
@@ -38,15 +41,15 @@ class EmpleadoSeeder extends Seeder
                     'imss' => rand(10000000000,99999999999),
                     'domicilio' => "Domicilio $i",
                     'telefono' => rand(1000000000,9999999999),
-                    'fecha_de_ingreso' => now(),
+                    'fecha_de_ingreso' => Carbon::now()->subDays(rand(1, 30)),
                     'cuenta_de_nomina' => Str::random(20),
 
-                    'user_id' => User::inRandomOrder()->first()->id,
+                    'user_id' => $usuario->id,
                     'sucursal_id' => Sucursal::inRandomOrder()->first()->id,
                     'linea_id' => Linea::inRandomOrder()->first()->id,
                     'departamento_id' => Departamento::inRandomOrder()->first()->id,
                     'cargo_id' => Cargo::inRandomOrder()->first()->id,
-                    'expediente_id' => Expediente::inRandomOrder()->first()->id,
+                    'expediente_id' => $expediente->id,
                     'periodo_id' => Periodo::inRandomOrder()->first()->id,
 
                 ]

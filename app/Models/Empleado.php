@@ -75,13 +75,17 @@ class Empleado extends Model
 // --------------------------------------------------------------------------------
 
 
-    public function Ausencia(){
+    public function solicitante(){
+        return $this->hasMany(Ausencia::class);
+    }
+
+    public function quienCubre(){
         return $this->hasMany(Ausencia::class);
     }
 
     public function Empleado()
     {
-        return $this->hasOne(Empleado::class, 'jefe_directo');
+        return $this->hasMany(Empleado::class, 'jefe_directo');
     }
 
     public function Encargado_Sucursal(){

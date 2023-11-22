@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Periodo;
 
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PutRequest extends FormRequest
 {
@@ -25,9 +26,9 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'años' => 'required|integer|max:35' . $this->route("periodo")->id,
-            'dias_correspondientes' => 'required|integer',
-            'regimen' => 'required|string|max:4',
+            'años' => ['required','integer','max:35',Rule::unique('periodos')->ignore($this->route("periodo")->id)],
+            'dias_correspondientes' => ['required','integer'],
+            'regimen' => ['required','string','max:4'],
         ];
     }
 

@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Expediente;
 
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PutRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class PutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'path' => 'required|string' . $this->route("expediente")->id,
+            'path' => ['required','string',Rule::unique('expediente')->ignore($this->route('expediente')->id)],
             'documento_id' => 'required|integer',
         ];
     }
