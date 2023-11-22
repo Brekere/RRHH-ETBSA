@@ -1,8 +1,21 @@
 <template>
     <div>
+
+        <o-modal v-model:active="confirmDeleteActive">
+            <div class="p-4">
+                <p>¿Seguro que quieres eliminar el registro seleccionado?</p>
+            </div>
+            <div class="flex flex-row-reverse gap-2 p-3" >
+                <o-button variant="danger" @click="deleteausencia()">Eliminar</o-button>
+                <o-button @click="confirmDeleteActive = false">Cancelar</o-button>
+            </div>
+
+        </o-modal>
+
         <h1>Listado de ausencia</h1>
 
-        <o-button variant="primary"><router-link :to="{name:'ausenciasave'}">Crear</router-link></o-button>
+        <o-button iconLeft="plus" @click="$router.push({ name: 'ausenciasave' })">Crear</o-button>
+        <div class="mb-5"></div>
 
         <o-table :loading="isLoading" :data="ausencias.current_page && ausencias.data.length == 0 ? [] : ausencias.data">
 
@@ -39,8 +52,8 @@
             </o-table-column>
 
             <o-table-column field="id" label="Acciones" v-slot="p">
-                <o-button variant="succes"><router-link :to="{name:'ausenciasave',params:{'id': p.row.id}}">Editar</router-link></o-button>
-                <o-button variant="danger" @click="deleteausencia(p)">Eliminar</o-button>
+                <router-link class="mr-5" :to="{name:'ausenciasave',params:{'id': p.row.id}}">Editar</router-link>
+                <o-button iconLeft="delete" :rounded="true" size="small" variant="danger" @click="deleteAusenciaRow=p, confirmDeleteActive = true">Eliminar</o-button>
             </o-table-column>
         </o-table>
 
@@ -72,7 +85,9 @@ export default {
         return {
             ausencias: [],
             isLoading: true,
-            currentPage:1
+            currentPage:1,
+            confirmDeleteActive: false,
+            deleteAusenciaRow: "",
         }
     },
 
@@ -90,10 +105,17 @@ export default {
         });
         },
 
-        deleteausencia(row){
-            this.ausencias.data.splice(row.index,1)
-            console.log(row)
-            this.$axios.delete("/api/ausencia/"+row.row.id)
+        deleteausencia(){
+            this.confirmDeleteActive = false
+            this.ausencias.data.splice(this.deleteAusenciaRow.index,1)
+            this.$axios.delete("/api/ausencia/"+this.deleteAusenciaRow.row.id)
+            this.$oruga.notification.open({
+                message: "Registro eliminado",
+                position: "bottom-right",
+                variant: "danger",
+                duration: 4000,
+                closable: true,
+            });
         }
     },
 

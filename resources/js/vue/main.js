@@ -1,5 +1,8 @@
 import { createApp } from "vue";
 
+//tailwind
+import '../../css/vue.css'
+
 // Oruga
 import Oruga from '@oruga-ui/oruga-next'
 import '@oruga-ui/oruga-next/dist/oruga.css'

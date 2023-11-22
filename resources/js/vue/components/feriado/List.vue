@@ -1,8 +1,19 @@
 <template>
     <div>
+        <o-modal v-model:active="confirmDeleteActive">
+            <div class="p-4">
+                <p>¿Seguro que quieres eliminar el registro seleccionado?</p>
+            </div>
+            <div class="flex flex-row-reverse gap-2 p-3" >
+                <o-button variant="danger" @click="deleteFeriado()">Eliminar</o-button>
+                <o-button @click="confirmDeleteActive = false">Cancelar</o-button>
+            </div>
+
+        </o-modal>
         <h1>Listado de feriado</h1>
 
-        <o-button variant="primary"><router-link :to="{name:'feriadosave'}">Crear</router-link></o-button>
+        <o-button iconLeft="plus" @click="$router.push({ name: 'feriadosave' })">Crear</o-button>
+        <div class="mb-5"></div>
 
         <o-table :loading="isLoading" :data="feriados.current_page && feriados.data.length == 0 ? [] : feriados.data">
 
@@ -15,8 +26,8 @@
             </o-table-column>
 
             <o-table-column field="id" label="Acciones" v-slot="p">
-                <o-button variant="succes"><router-link :to="{name:'feriadosave',params:{'id': p.row.id}}">Editar</router-link></o-button>
-                <o-button variant="danger" @click="deleteferiado(p)">Eliminar</o-button>
+                <router-link class="mr-5" :to="{name:'feriadosave',params:{'id': p.row.id}}">Editar</router-link>
+                <o-button iconLeft="delete" :rounded="true" size="small" variant="danger" @click="deleteFeriadoRow=p, confirmDeleteActive = true">Eliminar</o-button>
             </o-table-column>
         </o-table>
 
@@ -48,7 +59,9 @@ export default {
         return {
             feriados: [],
             isLoading: true,
-            currentPage:1
+            currentPage:1,
+            confirmDeleteActive: false,
+            deleteFeriadoRow: "",
         }
     },
 
@@ -66,10 +79,17 @@ export default {
         });
         },
 
-        deleteferiado(row){
-            this.feriados.data.splice(row.index,1)
-            console.log(row)
-            this.$axios.delete("/api/feriado/"+row.row.id)
+        deleteFeriado(){
+            this.confirmDeleteActive = false
+            this.feriados.data.splice(this.deleteFeriadoRow.index,1)
+            this.$axios.delete("/api/feriado/"+this.deleteFeriadoRow.row.id)
+            this.$oruga.notification.open({
+                message: "Registro eliminado",
+                position: "bottom-right",
+                variant: "danger",
+                duration: 4000,
+                closable: true,
+            });
         }
     },
 

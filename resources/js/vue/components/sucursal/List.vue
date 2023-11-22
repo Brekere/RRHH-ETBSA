@@ -1,8 +1,19 @@
 <template>
     <div>
+        <o-modal v-model:active="confirmDeleteActive">
+            <div class="p-4">
+                <p>¿Seguro que quieres eliminar el registro seleccionado?</p>
+            </div>
+            <div class="flex flex-row-reverse gap-2 p-3" >
+                <o-button variant="danger" @click="deleteSucursal()">Eliminar</o-button>
+                <o-button @click="confirmDeleteActive = false">Cancelar</o-button>
+            </div>
+
+        </o-modal>
         <h1>Listado de sucursal</h1>
 
-        <o-button variant="primary"><router-link :to="{name:'sucursalsave'}">Crear</router-link></o-button>
+        <o-button iconLeft="plus" @click="$router.push({ name: 'sucursalsave' })">Crear</o-button>
+        <div class="mb-5"></div>
 
         <o-table :loading="isLoading" :data="sucursals.current_page && sucursals.data.length == 0 ? [] : sucursals.data">
 
@@ -16,8 +27,8 @@
                 {{ p.row.encargado }}
             </o-table-column>
             <o-table-column field="id" label="Acciones" v-slot="p">
-                <o-button variant="succes"><router-link :to="{name:'sucursalsave',params:{'id': p.row.id}}">Editar</router-link></o-button>
-                <o-button variant="danger" @click="deleteSucursal(p)">Eliminar</o-button>
+                <router-link class="mr-5" :to="{name:'sucursalsave',params:{'id': p.row.id}}">Editar</router-link>
+                <o-button iconLeft="delete" :rounded="true" size="small" variant="danger" @click="deleteSucursalRow=p, confirmDeleteActive = true">Eliminar</o-button>
             </o-table-column>
         </o-table>
 
@@ -49,7 +60,9 @@ export default {
         return {
             sucursals: [],
             isLoading: true,
-            currentPage:1
+            currentPage:1,
+            confirmDeleteActive: false,
+            deleteSucursalRow: "",
         }
     },
 
@@ -67,10 +80,17 @@ export default {
         });
         },
 
-        deleteSucursal(row){
-            this.sucursals.data.splice(row.index,1)
-            console.log(row)
-            this.$axios.delete("/api/sucursal/"+row.row.id)
+        deleteSucursal(){
+            this.confirmDeleteActive = false
+            this.sucursals.data.splice(this.deleteSucursalRow.index,1)
+            this.$axios.delete("/api/sucursal/"+this.deleteSucursalRow.row.id)
+            this.$oruga.notification.open({
+                message: "Registro eliminado",
+                position: "bottom-right",
+                variant: "danger",
+                duration: 4000,
+                closable: true,
+            });
         }
     },
 
